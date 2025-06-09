@@ -68,6 +68,10 @@ abstract class Pokemon {
     public Ataque[] getAtaques() {
         return ataques;
     }
+
+    // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+    // MÉTODO ABSTRACTO PARA OBTENER EL TIPO DEL POKÉMON
+    public abstract String getTipo();
 }
 
 // -----------------------------
@@ -76,53 +80,67 @@ abstract class Pokemon {
 
 // Pokémon tipo Fuego
 class PokemonFuego extends Pokemon {
-    // Constructor: inicializa el Pokémon con ataques de tipo Fuego
     public PokemonFuego(String nombre) {
         super(nombre, 100, new Ataque[]{
-            new Ataque("Lanzallamas", 30), // Ataque fuerte
-            new Ataque("Ascuas", 20)       // Ataque más débil
+            new Ataque("Lanzallamas", 30),
+            new Ataque("Ascuas", 20)
         });
     }
+    // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+    @Override
+    public String getTipo() { return "Fuego"; }
 }
 
 // Pokémon tipo Agua
 class PokemonAgua extends Pokemon {
     public PokemonAgua(String nombre) {
         super(nombre, 100, new Ataque[]{
-            new Ataque("Hidrobomba", 28), // Ataque fuerte de agua
-            new Ataque("Burbuja", 18)     // Ataque débil de agua
+            new Ataque("Hidrobomba", 28),
+            new Ataque("Burbuja", 18)
         });
     }
+    // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+    @Override
+    public String getTipo() { return "Agua"; }
 }
 
 // Pokémon tipo Eléctrico
 class PokemonElectrico extends Pokemon {
     public PokemonElectrico(String nombre) {
         super(nombre, 100, new Ataque[]{
-            new Ataque("Impactrueno", 25), // Ataque fuerte eléctrico
-            new Ataque("Rayo", 22)         // Ataque débil eléctrico
+            new Ataque("Impactrueno", 25),
+            new Ataque("Rayo", 22)
         });
     }
+    // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+    @Override
+    public String getTipo() { return "Electrico"; }
 }
 
 // Pokémon tipo Hada
 class PokemonHada extends Pokemon {
     public PokemonHada(String nombre) {
         super(nombre, 100, new Ataque[]{
-            new Ataque("Brillo Mágico", 26), // Ataque fuerte de hada
-            new Ataque("Encanto", 19)        // Ataque débil de hada
+            new Ataque("Brillo Mágico", 26),
+            new Ataque("Encanto", 19)
         });
     }
+    // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+    @Override
+    public String getTipo() { return "Hada"; }
 }
 
 // Pokémon tipo Roca
 class PokemonRoca extends Pokemon {
     public PokemonRoca(String nombre) {
         super(nombre, 100, new Ataque[]{
-            new Ataque("Avalancha", 27),     // Ataque fuerte de roca
-            new Ataque("Lanzarrocas", 19)    // Ataque débil de roca
+            new Ataque("Avalancha", 27),
+            new Ataque("Lanzarrocas", 19)
         });
     }
+    // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+    @Override
+    public String getTipo() { return "Roca"; }
 }
 
 // -----------------------------
@@ -181,6 +199,33 @@ class Combate {
         this.enemigo = enemigo; // Asigna el entrenador enemigo
     }
 
+    // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+    // MÉTODO PARA CALCULAR EL MULTIPLICADOR DE DAÑO SEGÚN LOS TIPOS
+    private double calcularMultiplicador(String tipoAtacante, String tipoDefensor) {
+        if (tipoAtacante.equals("Fuego") && tipoDefensor.equals("Hada")) return 1.0;
+        if (tipoAtacante.equals("Fuego") && tipoDefensor.equals("Agua")) return 0.5;
+        if (tipoAtacante.equals("Fuego") && tipoDefensor.equals("Roca")) return 0.5;
+        if (tipoAtacante.equals("Fuego") && tipoDefensor.equals("Fuego")) return 0.5;
+
+        if (tipoAtacante.equals("Agua") && tipoDefensor.equals("Fuego")) return 1.0;
+        if (tipoAtacante.equals("Agua") && tipoDefensor.equals("Roca")) return 1.0;
+        if (tipoAtacante.equals("Agua") && tipoDefensor.equals("Agua")) return 0.5;
+
+        if (tipoAtacante.equals("Electrico") && tipoDefensor.equals("Agua")) return 1.0;
+        if (tipoAtacante.equals("Electrico") && tipoDefensor.equals("Roca")) return 0.5;
+        if (tipoAtacante.equals("Electrico") && tipoDefensor.equals("Electrico")) return 0.5;
+
+        if (tipoAtacante.equals("Hada") && tipoDefensor.equals("Roca")) return 0.5;
+        if (tipoAtacante.equals("Hada") && tipoDefensor.equals("Fuego")) return 0.5;
+        if (tipoAtacante.equals("Hada") && tipoDefensor.equals("Hada")) return 0.5;
+
+        if (tipoAtacante.equals("Roca") && tipoDefensor.equals("Fuego")) return 1.0;
+        if (tipoAtacante.equals("Roca") && tipoDefensor.equals("Electrico")) return 1.0;
+        if (tipoAtacante.equals("Roca") && tipoDefensor.equals("Roca")) return 0.5;
+
+        return 1.0;
+    }
+
     // Método que inicia y gestiona todo el combate entre los dos entrenadores
     public void iniciar() {
         // Imprime mensaje de inicio de combate mostrando los nombres de los entrenadores
@@ -191,7 +236,7 @@ class Combate {
             // Obtiene el primer Pokémon vivo del jugador (el que luchará este turno)
             Pokemon pokeJugador = jugador.obtenerPokemonVivo();
             // Obtiene el primer Pokémon vivo del enemigo (el que luchará este turno)
-            Pokemon pokeEnemigo = enemigo.obtenerPokemonVivo();
+            Pokemon pokeEnemigo = enemigo.obtenerPokemonVivo();  // Si no hay Pokémon vivos, el bucle terminará
 
             // Muestra en pantalla el nombre y la vida actual de ambos Pokémon que están luchando
             System.out.println("🔥 " + pokeJugador.getNombre() + " (Vida: " + pokeJugador.getVida() + ") VS " +
@@ -201,29 +246,41 @@ class Combate {
             int ataqueJugador = elegirAtaque(pokeJugador);
             // Obtiene el daño que causará el ataque elegido por el jugador
             int danoJugador = pokeJugador.getAtaques()[ataqueJugador].getDano();
+            // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+            double multJugador = calcularMultiplicador(pokeJugador.getTipo(), pokeEnemigo.getTipo());
+            int danoFinalJugador = (int)(danoJugador * multJugador);
             // Aplica el daño al Pokémon enemigo (resta la vida)
-            pokeEnemigo.recibirDano(danoJugador);
+            pokeEnemigo.recibirDano(danoFinalJugador);
             // Muestra en pantalla qué ataque usó el jugador y cuánto daño causó
             System.out.println("⚡ " + pokeJugador.getNombre() + " usa " +
-                    pokeJugador.getAtaques()[ataqueJugador].getNombre() + " y causa " + danoJugador + " de daño!");
+                    pokeJugador.getAtaques()[ataqueJugador].getNombre() + " y causa " + danoFinalJugador + " de daño!");
+            // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+            if (multJugador > 1.0) System.out.println("¡Es muy efectivo!");
+            if (multJugador < 1.0) System.out.println("No es muy efectivo...");
 
             // Si el Pokémon enemigo quedó sin vida después del ataque del jugador
             if (!pokeEnemigo.estaVivo()) {
                 // Muestra mensaje de que el Pokémon enemigo ha caído
                 System.out.println("💀 " + pokeEnemigo.getNombre() + " ha caído!");
                 // Salta el turno del enemigo (el bucle vuelve a empezar con el siguiente Pokémon enemigo)
-                continue;
+                continue; // Salta al inicio del bucle para que el jugador pueda atacar al siguiente Pokémon enemigo
             }
 
             // El enemigo elige un ataque de forma aleatoria (elige un índice válido del arreglo de ataques)
-            int ataqueEnemigo = random.nextInt(pokeEnemigo.getAtaques().length);
+            int ataqueEnemigo = random.nextInt(pokeEnemigo.getAtaques().length); // Genera un número aleatorio entre 0 y el número de ataques del Pokémon enemigo
             // Obtiene el daño que causará el ataque elegido por el enemigo
             int danoEnemigo = pokeEnemigo.getAtaques()[ataqueEnemigo].getDano();
+            // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+            double multEnemigo = calcularMultiplicador(pokeEnemigo.getTipo(), pokeJugador.getTipo());
+            int danoFinalEnemigo = (int)(danoEnemigo * multEnemigo);
             // Aplica el daño al Pokémon del jugador (resta la vida)
-            pokeJugador.recibirDano(danoEnemigo);
+            pokeJugador.recibirDano(danoFinalEnemigo);
             // Muestra en pantalla qué ataque usó el enemigo y cuánto daño causó
             System.out.println("🔥 " + pokeEnemigo.getNombre() + " contraataca con " +
-                    pokeEnemigo.getAtaques()[ataqueEnemigo].getNombre() + " causando " + danoEnemigo + " de daño!");
+                    pokeEnemigo.getAtaques()[ataqueEnemigo].getNombre() + " causando " + danoFinalEnemigo + " de daño!");
+            // === AÑADIDO: EFECTIVIDAD DE TIPOS ===
+            if (multEnemigo > 1.0) System.out.println("¡Es muy efectivo!");
+            if (multEnemigo < 1.0) System.out.println("No es muy efectivo...");
 
             // Si el Pokémon del jugador quedó sin vida después del ataque enemigo
             if (!pokeJugador.estaVivo()) {
