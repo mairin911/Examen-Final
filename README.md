@@ -1,32 +1,60 @@
 
 Desarrollo del Videojuego de Batalla Pokémon: Trabajo en equipo entre Jualex y Mairin
 
-Como parte del proyecto final de programación orientada a objetos, mi compañero Jualex y yo, Mairin, desarrollamos un videojuego de batalla por turnos inspirado en Pokémon. El juego fue desarrollado en Java usando conceptos fundamentales de la POO como clases, objetos, herencia, encapsulamiento y modularización del código. El objetivo fue simular una batalla entre entrenadores Pokémon, donde el jugador escoge su equipo y combate contra un oponente controlado por la máquina. A continuación, explico cómo nos dividimos las tareas y lo que hizo cada uno.
+Como parte del proyecto final de programación orientada a objetos, mi compañero Jualex y yo, Mairin, desarrollamos un videojuego de batalla por turnos inspirado en Pokémon. El juego fue desarrollado en Java usando conceptos fundamentales de la POO como clases, objetos, herencia, encapsulamiento y modularización del código. El objetivo fue simular una batalla contra entrenadores Pokémon, donde el jugador crea su equipo y combate contra un oponente controlado por la máquina. A continuación, explico cómo nos dividimos las tareas y lo que hizo cada uno.
 
-Aportes de Mairin: Diseño Base del Juego y la Estructura de los Pokémon
-Mi trabajo se centró principalmente en diseñar las clases base del sistema, encargándome de la estructura orientada a objetos. Implementé las siguientes partes:
+🧠 Trabajo de Jualex – Lógica de flujo principal y selección del jugador
+fui el encargado de diseñar y codificar todo el flujo principal del juego, es decir, lo que ocurre desde que el programa arranca hasta que comienza el combate. Esto incluye:
 
-Clase Ataque: Define el nombre y el daño que hace cada ataque. Se utiliza para asociar ataques con los Pokémon.
+Bienvenida y entrada de datos:
 
-Clase abstracta Pokemon: Sirve como plantilla base para todos los Pokémon del juego. Incluye atributos como nombre, vida y ataques, así como métodos para recibir daño, verificar si el Pokémon sigue vivo y acceder a sus datos.
+1. Pidi el nombre del jugador por consola usando Scanner.
+2. Mostre un mensaje introductorio claro para el usuario.
 
-Subclases de Pokémon por tipo: Implementé diferentes clases que heredan de Pokemon, como PokemonFuego, PokemonAgua, PokemonHada, PokemonRoca, y PokemonElectrico. Cada una se inicializa con dos ataques propios.
+Selección personalizada de equipo Pokémon:
 
-Clase Entrenador: Representa al jugador o al oponente. Contiene un nombre y un equipo de tres Pokémon. Incluye métodos para saber si le quedan Pokémon vivos y cuál es el próximo que luchará.
+1. Mostre una lista de Pokémon disponibles, con su número y tipo.
+2. Valide que el jugador solo pudiera elegir 3 Pokémon distintos.
+3. Use un arreglo booleano elegido[] para evitar elecciones repetidas.
+4. Maneje errores con try-catch para evitar fallos si el jugador ingresaba letras u opciones inválidas.
 
-Mi enfoque fue asegurar una buena reutilización del código y facilitar la organización de los Pokémon en equipos distintos para cada entrenador.
+Creación del rival aleatorio:
 
-Aportes de Jualex: Lógica del Combate y Experiencia del Jugador
-Jualex se encargó principalmente de la lógica del combate, de la interacción con el jugador y del flujo principal del programa. Lo que él desarrolló incluye:
+1. Defini los equipos de Ash, Misty, Brock y Serena.
+2. Seleccione un rival al azar usando la clase Random.
+3. Mostre al jugador qué entrenador fue elegido y qué Pokémon usará ese rival.
 
-Clase Combate: Esta clase gestiona el sistema de batalla por turnos. Implementó un bucle que se repite mientras ambos entrenadores tengan Pokémon vivos. En cada turno, el jugador elige el ataque, y el oponente responde con uno aleatorio. La clase controla la aplicación del daño, muestra mensajes en pantalla e informa cuando un Pokémon es derrotado.
+Instancia de combate:
+Una vez configurados los entrenadores, llamé al método iniciar() del objeto Combate para comenzar la pelea.
 
-Método elegirAtaque(): Permite al jugador elegir entre los ataques disponibles de su Pokémon, con validación de entrada para evitar errores.
+En resumen, construí toda la parte donde el jugador interactúa con el juego antes del combate, Donde el jugador puede personalizar su equipo y enfrentarse a un rival diferente cada vez.
 
-Flujo del juego en la clase Main: Jualex implementó todo lo relacionado con el menú inicial. El jugador selecciona su entrenador (Ash, Serena, Misty o Brock), y el sistema elige aleatoriamente un oponente diferente. Luego se inicia la batalla llamando al método iniciar() de la clase Combate.
+⚔️ Trabajo de Mairin – Sistema de combate y clases del juego
+fui responsable de toda la lógica del combate y la estructura interna del juego. Mis aportes son fundamentales para que la batalla funcione correctamente y tenga sentido en términos de estrategia. Esto incluye:
 
-Su enfoque fue crear una experiencia dinámica y fácil de usar para el jugador, además de controlar la lógica del combate de forma clara.
+Clases de Pokémon:
 
-Conclusión: Trabajo en Equipo 
-El desarrollo del proyecto se realizó dividiendo claramente las responsabilidades: Mairin se encargó del diseño de las clases base y la estructura OOP, y Jualex se enfocó en la interacción, el flujo del juego y la lógica de combate. Gracias a esta organización, logramos crear un sistema modular, fácil de mantener y ampliable en futuras versiones (por ejemplo, agregando más tipos de Pokémon o habilidades especiales).
-# Examen-Final
+1. Cree una clase base llamada Pokemon, que contiene atributos como nombre, tipo, salud (vida) y una lista de ataques.
+2. Implemente subclases como PokemonAgua, PokemonFuego, PokemonRoca, PokemonHada y PokemonElectrico, que heredan de Pokemon y tienen ataques diferentes según su tipo.
+
+Sistema de ataque y efectividad:
+
+1. Programe la clase Ataque, que contiene el nombre y el daño base.
+2. Añadi un sistema que calcula si un ataque es más o menos efectivo dependiendo del tipo del Pokémon rival (por ejemplo, el agua es fuerte contra fuego).
+Esta lógica de efectividad está implementada dentro del combate, afectando el daño final de cada ataque.
+
+Clase Entrenador:
+
+1. Cree la clase Entrenador, que contiene el nombre del entrenador y su equipo Pokémon.
+Esta clase se usa tanto para el jugador como para el rival.
+
+Combate por turnos:
+
+1. Implemente la clase Combate, donde programó toda la pelea:
+2. El jugador elige su Pokémon activo y el ataque a usar.
+3. El rival selecciona Pokémon y ataques aleatoriamente.
+4. Se muestran mensajes del combate paso a paso (quién ataca, cuánto daño hace, si es efectivo, etc.).
+5. Se verifica si un Pokémon fue derrotado, y se pide al jugador elegir otro si es necesario.
+6. El combate termina cuando todos los Pokémon de un equipo pierden su vida.
+
+En resumen, construí todo lo que pasa dentro del combate, haciendo posible que los ataques, los efectos y la estrategia existan.
