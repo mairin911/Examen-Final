@@ -205,15 +205,18 @@ En resumen, construí todo lo que pasa dentro del combate, haciendo posible que 
     | +atacar(Pokemon objetivo): int                                |
     | +getAtaques(): Ataque[]                                       |
     +----------------------------------------------------------------+
-           ▲                          ▲                          ▲
-           |                          |                          |
-  +----------------+        +----------------+        +----------------+
-  |   TipoAgua     |        |   TipoFuego    |        |  TipoPlanta    |
-  +----------------+        +----------------+        +----------------+
-  | (hereda de Pokémon)     | (hereda de Pokémon)     | (hereda de Pokémon)
-  +----------------+        +----------------+        +----------------+
-  | (usa lógica de efectividad basada en tipo enemigo)                 |
-  +-------------------------------------------------------------------+
+     
+         
+         ▲                          ▲                          ▲
+         |                          |                          |
+ +----------------+        +----------------+        +----------------+
+ |   TipoAgua     |        |   TipoFuego    |        |  TipoPlanta    |
+ +----------------+        +----------------+        +----------------+
+ | (hereda de Pokémon)     | (hereda de Pokémon)     | (hereda de Pokémon)
+ +----------------+        +----------------+        +----------------+
+ | (usa lógica de efectividad basada en tipo enemigo)                 |
+ +-------------------------------------------------------------------+
+
 
 
                        +------------------------+
