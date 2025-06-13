@@ -205,8 +205,8 @@ En resumen, construí todo lo que pasa dentro del combate, haciendo posible que 
     | +atacar(Pokemon objetivo): int                                |
     | +getAtaques(): Ataque[]                                       |
     +----------------------------------------------------------------+
-         ▲                          ▲                          ▲
-         |                          |                          |
+           ▲                          ▲                          ▲
+           |                          |                          |
  +----------------+        +----------------+        +----------------+
  |   TipoAgua     |        |   TipoFuego    |        |  TipoPlanta    |
  +----------------+        +----------------+        +----------------+
@@ -214,6 +214,7 @@ En resumen, construí todo lo que pasa dentro del combate, haciendo posible que 
  +----------------+        +----------------+        +----------------+
  | (usa lógica de efectividad basada en tipo enemigo)                 |
  +-------------------------------------------------------------------+
+
 
                        +------------------------+
                        |      Entrenador        |
