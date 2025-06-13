@@ -162,64 +162,68 @@ En resumen, construí todo lo que pasa dentro del combate, haciendo posible que 
 
 # 📊 UML (Modelo de Clases)
 
-```plaintext
 +----------------+
-|    Ataque      |
-+----------------+
-| - nombre: String
-| - danio: int
-+----------------+
-| +getNombre(): String
-| +getDanio(): int
-+----------------+
-       ▲
-       |
-       |
-+----------------------------+
-|      <<abstract>> Pokémon |
-+----------------------------+
-| #nombre: String            |
-| #vida: int                 |
-| #ataques: Ataque[]         |
-+----------------------------+
-| +getNombre(): String       |
-| +getVida(): int            |
-| +recibirDanio(int): void   |
-| +atacar(Pokemon): int      |
-| +getAtaques(): Ataque[]    |
-+----------------------------+
-   ▲        ▲        ▲
-   |        |        |
-+-------+ +-------+ +--------+
-| Agua  | | Fuego | | Planta |
-+-------+ +-------+ +--------+
+                                    |    Ataque      |
+                                    +----------------+
+                                    | - nombre: String
+                                    | - danio: int
+                                    +----------------+
+                                    | +getNombre(): String
+                                    | +getDanio(): int
+                                    +----------------+
 
-+----------------------------+
-|        Entrenador          |
-+----------------------------+
-| - nombre: String           |
-| - equipo: Pokemon[]        |
-| - pokemonActivo: int       |
-+----------------------------+
-| +getNombre(): String       |
-| +getEquipo(): Pokemon[]    |
-| +elegirPokemon(): void     |
-| +mostrarEquipo(): void     |
-| +getPokemonActivo(): Pokemon |
-| +cambiarPokemon(int): void |
-+----------------------------+
+                                             ▲
+                                             |
+                                    [Utilizado por]
+                                             |
+    +----------------------------------------------------------------+
+    |                        <<abstract>> Pokémon                    |
+    +----------------------------------------------------------------+
+    | #nombre: String                                               |
+    | #vida: int                                                    |
+    | #ataques: Ataque[]                                            |
+    +----------------------------------------------------------------+
+    | +getNombre(): String                                          |
+    | +getVida(): int                                               |
+    | +recibirDanio(int danio): void                                |
+    | +atacar(Pokemon objetivo): int                                |
+    | +getAtaques(): Ataque[]                                       |
+    +----------------------------------------------------------------+
+         ▲                          ▲                          ▲
+         |                          |                          |
+ +----------------+        +----------------+        +----------------+
+ |   TipoAgua     |        |   TipoFuego    |        |  TipoPlanta    |
+ +----------------+        +----------------+        +----------------+
+ | (hereda de Pokémon)     | (hereda de Pokémon)     | (hereda de Pokémon)
+ +----------------+        +----------------+        +----------------+
+ | (usa lógica de efectividad basada en tipo enemigo)                 |
+ +-------------------------------------------------------------------+
 
-+----------------------------+
-|           Main             |
-+----------------------------+
-| +main(String[]): void      |
-+----------------------------+
-| - Scanner input            |
-| - Random random            |
-| - flujo del juego          |
-| - menú de acciones         |
-| - IA del oponente          |
-| - turnos de combate        |
-| - impresión de estado      |
-+----------------------------+
-```
+                       +------------------------+
+                       |      Entrenador        |
+                       +------------------------+
+                       | - nombre: String       |
+                       | - equipo: Pokemon[]    |
+                       | - pokemonActivo: int   |
+                       +------------------------+
+                       | +getNombre(): String   |
+                       | +getEquipo(): Pokemon[]|
+                       | +elegirPokemon(): void |
+                       | +mostrarEquipo(): void |
+                       | +getPokemonActivo(): Pokemon |
+                       | +cambiarPokemon(int): void   |
+                       +------------------------+
+
+                       +------------------------+
+                       |         Main           |
+                       +------------------------+
+                       | +main(String[]): void  |
+                       +------------------------+
+                       | - Scanner input        |
+                       | - Random random        |
+                       | - flujo del juego      |
+                       | - menú de acciones     |
+                       | - IA del oponente      |
+                       | - turnos de combate    |
+                       | - impresión de estado  |
+                       +------------------------+
