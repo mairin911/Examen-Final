@@ -118,51 +118,67 @@ En resumen, construí todo lo que pasa dentro del combate, haciendo posible que 
 
 ---
 
-# 🔄 SDLC - Ciclo de Vida del Desarrollo de Software
-
 # Proyecto Final: Videojuego de Pelea tipo Pokémon (Java OOP)
 
-1. **Recolección de Requisitos**
 
-   * Lenguaje: Java
-   * POO: herencia, encapsulamiento, modularización
-   * Flujo funcional y documentado
+# 1 **Recolección de Requisitos**
+* ¿Qué pide el proyecto?
+* Lenguaje: Java
+* Programación orientada a objetos (POO)
+* Uso de: herencia, encapsulamiento, modularización, bucles, condicionales
+* Al menos 4 clases
+* Flujo de juego funcional y documentado
+* Resultado: Entendimos las expectativas del profesor y definimos el alcance del videojuego.
 
-2. **Análisis**
+# 2 **Análisis**
+* ¿Qué debe hacer el programa?
+* Jugador elige un entrenador (Ash, Misty, Brock o Serena)
+* Cada entrenador tiene 3 Pokémon
+* Ataques por turnos
+* Oponente usa decisiones aleatorias
+* Efectividad de tipos (Fuego, Agua, Planta, Eléctrico)
+* Resultado: Definimos las reglas del juego y los elementos del sistema.
 
-   * Elección de entrenador
-   * 3 Pokémon por entrenador
-   * Ataques por turnos
-   * Efectividad de tipos
+# 3 **Diseño**
+* ¿Cómo organizamos el código?
+* Clases: Ataque, Pokemon (abstracta), subclases por tipo
+* Clase Entrenador: contiene los Pokémon
+* Clase Combate: lógica del juego por turnos
+* Clase Main: menú y flujo principal
+* Resultado: Se definió una estructura modular clara con responsabilidades separadas.
 
-3. **Diseño**
+# 4 **Implementación**
+* ¿Cómo lo programamos?
+* Mairin: lógica OOP, clases base, subclases, ataques, modularización
+* Jualex: flujo de combate, entrada de datos, aleatoriedad, ejecución general
+* Resultado: Código funcional y dividido por responsabilidades, comentado línea por línea.
 
-   * Clases: Ataque, Pokemon, subclases
-   * Entrenador, Combate, Main
+# 5 **Pruebas**
+* ¿Funciona correctamente?
+* Se probaron ataques y daño
+* Se verificó la efectividad de tipos
+* Combate completo entre entrenadores
+* Validación de entradas
+* Resultado: Juego probado con éxito en consola, listo para expandirse.
 
-4. **Implementación**
+# 6 **Despliegue**
+* ¿Dónde y cómo se ejecuta?
+* Ejecutado en consola (VS Code / IntelliJ)
+* Interfaz gráfica en planeación (Swing)
+* Código subido a GitHub con README
+* Resultado: Proyecto funcional y disponible para revisión o mejora.
 
-   * Mairin: lógica OOP
-   * Jualex: flujo y entradas
-
-5. **Pruebas**
-
-   * Daño, ataques, validaciones
-
-6. **Despliegue**
-
-   * Ejecutado en consola
-   * Repositorio GitHub
-
-7. **Mantenimiento**
-
-   * Código escalable y documentado
-
+# 7  **Mantenimiento**
+* ¿Se puede mejorar o actualizar?
+* Código completamente documentado
+* Modular, ideal para escalar (nuevos Pokémon, interfaz, efectos)
+* Ideal para continuar como versión gráfica
+* Resultado: Proyecto mantenible y listo para evolución futura.
 ---
 
 # 📊 UML (Modelo de Clases)
 
-+----------------+
+                                    +----------------+
                                     |    Ataque      |
                                     +----------------+
                                     | - nombre: String
